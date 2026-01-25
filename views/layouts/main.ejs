@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %> | صرح عامر</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+         :root {
+            --bg-dark: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --accent: #ffcc00;
+            --text-main: #e0e0e0;
+            --sidebar-width: 260px;
+        }
+        
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+        }
+        /* Sidebar Style */
+        
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background-color: var(--card-bg);
+            position: fixed;
+            border-left: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+        }
+        
+        .sidebar-header {
+            text-align: center;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #333;
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-header h2 {
+            color: var(--accent);
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .nav-links li {
+            padding: 15px 25px;
+            transition: 0.3s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-links li:hover {
+            background-color: #252525;
+            border-right: 4px solid var(--accent);
+        }
+        
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .nav-links i {
+            margin-left: 15px;
+            color: var(--accent);
+            width: 20px;
+        }
+        /* Main Content */
+        
+        .main-content {
+            margin-right: var(--sidebar-width);
+            padding: 30px;
+            width: calc(100% - var(--sidebar-width));
+        }
+        
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .btn-add {
+            background-color: var(--accent);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        
+        .btn-add:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>company name</h2>
+            <small style="color: #666;">نظام إدارة الفنيين</small>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="/admin/add-tech"><i class="fas fa-user-plus"></i> إضافة فني</a></li>
+            <li><a href="/admin/add-task"><i class="fas fa-tasks"></i> تكليف مهمة</a></li>
+            <li><a href="#"><i class="fas fa-clipboard-list"></i> جميع المهام</a></li>
+            <li><a href="#"><i class="fas fa-archive"></i> الأرشيف</a></li>
+            <li style="margin-top: auto; border-top: 1px solid #333;"><a href="#"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <%- body %>
+    </main>
+
+</body>
+
+</html>
