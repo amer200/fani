@@ -1,0 +1,27 @@
+<%- include('../includes/head.ejs') %>
+
+    <body class="bg-light">
+        <div class="container mt-5">
+            <h2 class="mb-4">
+                <%= title %>
+            </h2>
+            <form action="/admin/edit-tech" method="POST" class="card p-4 shadow-sm border-0">
+                <input type="hidden" name="id" value="<%= tech._id %>">
+
+                <div class="mb-3">
+                    <label>اسم الفني</label>
+                    <input type="text" name="name" class="form-control" value="<%= tech.name %>" required>
+                </div>
+                <div class="mb-3">
+                    <label>رقم الهاتف</label>
+                    <input type="text" name="phone" class="form-control" value="<%= tech.phone %>" required>
+                </div>
+                <div class="mb-3">
+                    <label>التخصص</label>
+                    <input type="text" name="specialty" class="form-control" value="<%= tech.specialty %>" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">تحديث البيانات</button>
+            </form>
+        </div>
+    </body>

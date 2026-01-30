@@ -1,0 +1,68 @@
+<div class="top-bar">
+    <h1>إضافة مهمة جديدة للفنيين</h1>
+    <div class="user-info">
+        <a href="/admin/dashboard" style="color: var(--accent); text-decoration: none; margin-left: 20px;">
+            <i class="fas fa-arrow-right"></i> العودة للوحة التحكم
+        </a>
+    </div>
+</div>
+
+<div style="max-width: 800px; margin: 0 auto; background: var(--card-bg); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    <form action="/admin/add-task" method="POST">
+
+        <h3 style="color: var(--accent); border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;">
+            <i class="fas fa-user"></i> بيانات العميل
+        </h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+            <div>
+                <label style="display: block; margin-bottom: 8px; color: #888;">اسم العميل</label>
+                <input type="text" name="clientName" required placeholder="مثلاً: محمد علي" style="width: 100%; background: #222; border: 1px solid #333; color: white; padding: 12px; border-radius: 8px; outline: none;">
+            </div>
+            <div>
+                <label style="display: block; margin-bottom: 8px; color: #888;">رقم التليفون</label>
+                <input type="text" name="clientPhone" required placeholder="01XXXXXXXXX" style="width: 100%; background: #222; border: 1px solid #333; color: white; padding: 12px; border-radius: 8px; outline: none;">
+            </div>
+        </div>
+
+        <div style="margin-bottom: 25px;">
+            <label style="display: block; margin-bottom: 8px; color: #888;">العنوان بالتفصيل</label>
+            <input type="text" name="clientAddress" required placeholder="مثلاً: أسوان - شارع كورنيش النيل" style="width: 100%; background: #222; border: 1px solid #333; color: white; padding: 12px; border-radius: 8px; outline: none;">
+        </div>
+
+        <h3 style="color: var(--accent); border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;">
+            <i class="fas fa-tools"></i> تفاصيل المهمة وتعيين الفني
+        </h3>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+            <div>
+                <label style="display: block; margin-bottom: 8px; color: #888;">نوع المهمة</label>
+                <select name="taskType" style="width: 100%; background: #222; border: 1px solid #333; color: white; padding: 12px; border-radius: 8px; outline: none; cursor: pointer;">
+                    <option value="صيانة">صيانة</option>
+                    <option value="تركيب">تركيب</option>
+                    <option value="معاينة">معاينة</option>
+                </select>
+            </div>
+            <div>
+                <label style="display: block; margin-bottom: 8px; color: #888;">اختيار الفني المسؤول</label>
+                <select name="assignedTechnician" required style="width: 100%; background: #222; border: 1px solid #333; color: white; padding: 12px; border-radius: 8px; outline: none; cursor: pointer;">
+                    <option value="" disabled selected>اختر فني من القائمة...</option>
+                    <% techs.forEach(tech => { %>
+                        <option value="<%= tech._id %>">
+                            <%= tech.name %> (<%= tech.specialty %>)
+                        </option>
+                    <% }) %>
+                </select>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <label style="display: block; margin-bottom: 8px; color: #888;">وصف العطل أو المهمة</label>
+            <textarea name="description" rows="4" required placeholder="اكتب تفاصيل ما سيقوم به الفني..." style="width: 100%; background: #222; border: 1px solid #333; color: white; padding: 12px; border-radius: 8px; outline: none; resize: none;"></textarea>
+        </div>
+
+        <button type="submit" style="width: 100%; background: var(--accent); color: black; border: none; padding: 15px; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+            <i class="fas fa-plus-circle"></i> إضافة المهمة وتنبيه الفني
+        </button>
+
+    </form>
+</div>
