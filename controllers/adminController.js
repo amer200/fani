@@ -36,6 +36,7 @@ exports.postAddTech = async(req, res) => {
         await Technician.create({ name, phone, password, specialty });
         res.redirect('/admin/dashboard');
     } catch (error) {
+        console.log(error)
         res.status(500).send('حدث خطأ أثناء إضافة الفني');
     }
 };

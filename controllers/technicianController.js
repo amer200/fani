@@ -6,8 +6,8 @@ const Technician = require('../models/Technician');
 exports.createTechnician = async(req, res) => {
     try {
         const { name, phone, password, specialty } = req.body;
-
-        // التأكد من عدم وجود فني بنفس الرقم
+        console.log(req.body)
+                // التأكد من عدم وجود فني بنفس الرقم
         const technicianExists = await Technician.findOne({ phone });
         if (technicianExists) {
             return res.status(400).json({ success: false, message: 'هذا الرقم مسجل بالفعل لفني آخر' });
