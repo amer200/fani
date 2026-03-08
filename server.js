@@ -2,6 +2,7 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
 
 dotenv.config();
@@ -19,7 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // مهم عشان فورمات الـ EJS
-
+app.use(cookieParser());
 // --- Routes ---
 // 1. Admin SSR Routes
 app.use('/admin', require('./routes/adminRoutes'));

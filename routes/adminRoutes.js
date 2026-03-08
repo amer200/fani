@@ -1,31 +1,39 @@
 const express = require('express');
 const router = express.Router();
 const adminController = require('../controllers/adminController');
+const authController = require('../controllers/authController');
+const authMiddleware = require('../middleware/auth');
+
+
+router.get('/login', authController.getLoginPage);
+router.post('/login', authController.postLogin);
+router.get('/logout', authController.logout);
+
 
 // --- مسارات الداشبورد الرئيسية ---
-router.get('/', adminController.getDashboard);
-router.get('/dashboard', adminController.getDashboard);
+router.get('/', authMiddleware, adminController.getDashboard);
+router.get('/dashboard', authMiddleware, adminController.getDashboard);
 
 // --- مسارات إدارة الفنيين (Technicians) ---
 // عرض فورم إضافة فني
-router.get('/add-tech', adminController.getAddTechPage);
+router.get('/add-tech', authMiddleware, adminController.getAddTechPage);
 // استقبال بيانات الفني الجديد
-router.post('/add-tech', adminController.postAddTech);
+router.post('/add-tech', authMiddleware, adminController.postAddTech);
 
 // --- مسارات إدارة المهام (Tasks) ---
 // عرض فورم إضافة مهمة وتعيينها لفني
-router.get('/add-task', adminController.getAddTaskPage);
+router.get('/add-task', authMiddleware, adminController.getAddTaskPage);
 // استقبال بيانات المهمة وحفظها
-router.post('/add-task', adminController.postAddTask);
+router.post('/add-task', authMiddleware, adminController.postAddTask);
 // عرض جميع المهام
 router.get('/tasks', adminController.getAllTasksPage);
 // --- Routes للفنيين ---
-router.get('/edit-tech/:id', adminController.getEditTechPage);
-router.post('/edit-tech', adminController.postEditTech);
-router.post('/delete-tech/:id', adminController.postDeleteTech);
+router.get('/edit-tech/:id', authMiddleware, adminController.getEditTechPage);
+router.post('/edit-tech', authMiddleware, adminController.postEditTech);
+router.post('/delete-tech/:id', authMiddleware, adminController.postDeleteTech);
 
 // --- Routes للمهام ---
-router.get('/edit-task/:id', adminController.getEditTaskPage);
-router.post('/edit-task', adminController.postEditTask);
-router.post('/delete-task/:id', adminController.postDeleteTask);
+router.get('/edit-task/:id', authMiddleware, adminController.getEditTaskPage);
+router.post('/edit-task', authMiddleware, adminController.postEditTask);
+router.post('/delete-task/:id', authMiddleware, adminController.postDeleteTask);
 module.exports = router;
