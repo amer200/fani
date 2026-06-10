@@ -4,7 +4,8 @@ const path = require('path');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
-
+const Admin = require('./models/Admin');
+const bcrypt = require('bcryptjs');
 dotenv.config();
 connectDB();
 
@@ -52,5 +53,6 @@ const seedAdmins = async() => {
         process.exit();
     }
 };
+seedAdmins();
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Hybrid Server running on port ${PORT}`.yellow.bold));
