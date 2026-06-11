@@ -1,53 +1,142 @@
-<div class="top-bar">
-    <h1>سجل المهام والعمليات</h1>
+<div class="top-bar" style="
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+">
+    <h1 style="
+        font-size: 1.8rem; 
+        font-weight: 700; 
+        color: #f5f5f7; 
+        margin: 0;
+    ">
+        سجل المهام والعمليات
+    </h1>
     <div class="user-info">
-        <a href="/admin/add-task" style="background: var(--accent); color: black; padding: 8px 15px; border-radius: 8px; text-decoration: none; font-weight: bold;">
-            <i class="fas fa-plus"></i> مهمة جديدة
+        <a href="/admin/add-task" style="
+            background: var(--accent, #ffcc00); 
+            color: #000000; 
+            padding: 10px 20px; 
+            border-radius: 8px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        " onmouseover="this.style.background='#e6b800'; this.style.transform='translateY(-1px)';" onmouseout="this.style.background='var(--accent, #ffcc00)'; this.style.transform='translateY(0)';" onmousedown="this.style.transform='translateY(1px)';">
+            <i class="fas fa-plus" style="font-size: 0.85rem;"></i> مهمة جديدة
         </a>
     </div>
 </div>
 
-<div style="background: var(--card-bg); padding: 25px; border-radius: 15px;">
-    <table style="width: 100%; border-collapse: collapse; text-align: right;">
+<div style="
+    background: rgba(30, 30, 30, 0.6); 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 25px; 
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    overflow-x: auto; /* لضمان مرونة التصميم على الشاشات الصغيرة */
+">
+    <table style="width: 100%; border-collapse: collapse; text-align: right; min-width: 700px;">
         <thead>
-            <tr style="border-bottom: 2px solid #333; color: #888;">
-                <th style="padding: 15px;">العميل</th>
-                <th style="padding: 15px;">الفني المسؤول</th>
-                <th style="padding: 15px;">نوع المهمة</th>
-                <th style="padding: 15px;">الحالة</th>
-                <th style="padding: 15px;">تاريخ الإضافة</th>
-                <th style="padding: 15px;">العمليات</th>
+            <tr style="border-bottom: 2px solid rgba(255, 255, 255, 0.08); color: #aeaeae; font-size: 0.9rem;">
+                <th style="padding: 18px 15px; font-weight: 600;">العميل</th>
+                <th style="padding: 18px 15px; font-weight: 600;">الفني المسؤول</th>
+                <th style="padding: 18px 15px; font-weight: 600;">نوع المهمة</th>
+                <th style="padding: 18px 15px; font-weight: 600;">الحالة</th>
+                <th style="padding: 18px 15px; font-weight: 600;">تاريخ الإضافة</th>
+                <th style="padding: 18px 15px; font-weight: 600; text-align: center;">العمليات</th>
             </tr>
         </thead>
         <tbody>
             <% tasks.forEach(task => { %>
-                <tr style="border-bottom: 1px solid #222; transition: 0.3s;" onmouseover="this.style.backgroundColor='#222'" onmouseout="this.style.backgroundColor='transparent'">
-                    <td style="padding: 15px;">
-                        <strong style="display: block;"><%= task.clientName %></strong>
-                        <small style="color: #666;"><%= task.clientPhone %></small>
+                <tr style="
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.03); 
+                    transition: all 0.25s ease;
+                " onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.03)';" onmouseout="this.style.backgroundColor='transparent'">
+
+                    <td style="padding: 18px 15px;">
+                        <strong style="display: block; color: #ffffff; font-size: 0.95rem; margin-bottom: 4px;"><%= task.clientName %></strong>
+                        <small style="color: #8a8a8e; font-size: 0.8rem; font-family: monospace;"><%= task.clientPhone %></small>
                     </td>
-                    <td style="padding: 15px;">
-                        <%= task.assignedTechnician ? task.assignedTechnician.name : 'غير معين' %>
+
+                    <td style="padding: 18px 15px; color: #e5e5ea; font-size: 0.95rem;">
+                        <% if(task.assignedTechnician) { %>
+                            <span style="display: inline-flex; align-items: center; gap: 6px;">
+                                <i class="fas fa-user-cog" style="color: #aeaeae; font-size: 0.85rem;"></i> <%= task.assignedTechnician.name %>
+                            </span>
+                            <% } else { %>
+                                <span style="color: #ff3b30; background: rgba(255, 59, 48, 0.1); padding: 3px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">⚠️ غير معين</span>
+                                <% } %>
                     </td>
-                    <td style="padding: 15px;">
-                        <span style="background: #333; padding: 4px 10px; border-radius: 5px; font-size: 12px;"><%= task.taskType %></span>
+
+                    <td style="padding: 18px 15px;">
+                        <span style="
+                            background: rgba(255, 255, 255, 0.06); 
+                            color: #d1d1d6;
+                            padding: 6px 12px; 
+                            border-radius: 6px; 
+                            font-size: 0.8rem;
+                            font-weight: 600;
+                            border: 1px solid rgba(255, 255, 255, 0.04);
+                        ;"><%= task.taskType %></span>
                     </td>
-                    <td style="padding: 15px;">
+
+                    <td style="padding: 18px 15px;">
                         <% if(task.status === 'قيد الانتظار') { %>
-                            <span style="color: #ffb800; background: rgba(255,184,0,0.1); padding: 5px 10px; border-radius: 20px; font-size: 12px;">● قيد الانتظار</span>
+                            <span style="color: #ff9500; background: rgba(255, 149, 0, 0.12); padding: 6px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+                                <span style="width: 6px; height: 6px; background: #ff9500; border-radius: 50%; box-shadow: 0 0 8px #ff9500;"></span> قيد الانتظار
+                            </span>
                             <% } else if(task.status === 'جاري العمل') { %>
-                                <span style="color: #00d1ff; background: rgba(0,209,255,0.1); padding: 5px 10px; border-radius: 20px; font-size: 12px;">● جاري العمل</span>
+                                <span style="color: #007aff; background: rgba(0, 122, 255, 0.12); padding: 6px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+                                <span style="width: 6px; height: 6px; background: #007aff; border-radius: 50%; box-shadow: 0 0 8px #007aff;"></span> جاري العمل
+                                </span>
                                 <% } else { %>
-                                    <span style="color: #00ff88; background: rgba(0,255,136,0.1); padding: 5px 10px; border-radius: 20px; font-size: 12px;">● مكتملة</span>
+                                    <span style="color: #34c759; background: rgba(52, 199, 89, 0.12); padding: 6px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+                                <span style="width: 6px; height: 6px; background: #34c759; border-radius: 50%; box-shadow: 0 0 8px #34c759;"></span> مكتملة
+                                    </span>
                                     <% } %>
                     </td>
-                    <td style="padding: 15px; font-size: 13px; color: #666;">
+
+                    <td style="padding: 18px 15px; font-size: 0.85rem; color: #8a8a8e;">
+                        <i class="far fa-calendar-alt" style="margin-left: 4px; font-size: 0.8rem;"></i>
                         <%= task.createdAt.toLocaleDateString('ar-EG') %>
                     </td>
-                    <td style="padding: 15px;">
-                        <div style="display: flex; gap: 10px;">
-                            <button title="عرض التفاصيل" style="background: #333; border: none; color: white; padding: 5px 8px; border-radius: 5px; cursor: pointer;"><i class="fas fa-eye"></i></button>
-                            <button title="حذف" style="background: rgba(255,68,68,0.1); border: 1px solid #ff4444; color: #ff4444; padding: 5px 8px; border-radius: 5px; cursor: pointer;"><i class="fas fa-trash"></i></button>
+
+                    <td style="padding: 18px 15px; text-align: center;">
+                        <div style="display: flex; gap: 8px; justify-content: center;">
+                            <button title="عرض التفاصيل" style="
+                                background: rgba(255, 255, 255, 0.05); 
+                                border: 1px solid rgba(255, 255, 255, 0.08); 
+                                color: #ffffff; 
+                                padding: 7px 10px; 
+                                border-radius: 6px; 
+                                cursor: pointer;
+                                font-size: 0.85rem;
+                                transition: all 0.2s ease;
+                            " onmouseover="this.style.background='rgba(255, 255, 255, 0.15)'; this.style.borderColor='rgba(255,255,255,0.2)';" onmouseout="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(255, 255, 255, 0.08)';">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button title="حذف" style="
+                                background: rgba(255, 59, 48, 0.08); 
+                                border: 1px solid rgba(255, 59, 48, 0.2); 
+                                color: #ff3b30; 
+                                padding: 7px 10px; 
+                                border-radius: 6px; 
+                                cursor: pointer;
+                                font-size: 0.85rem;
+                                transition: all 0.2s ease;
+                            " onmouseover="this.style.background='rgba(255, 59, 48, 0.2)'; this.style.borderColor='rgba(255, 59, 48, 0.4)';" onmouseout="this.style.background='rgba(255, 59, 48, 0.08)'; this.style.borderColor='rgba(255, 59, 48, 0.2)';"
+                                onclick="return confirm('هل أنت متأكد من حذف هذه المهمة؟')">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </div>
                     </td>
                 </tr>
